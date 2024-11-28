@@ -13,6 +13,7 @@ let browserInstances = [];
 // })
 
 EventBus.on('NewPrice', (event) => {
+    console.log(event)
     browserInstances.map(instance => {
         instance.postMessage(event)
     })
@@ -25,11 +26,19 @@ onconnect = function(e) {
 
     browserInstances.push(port);
 
-    // port.onmessage = function({data}) {
-    //     console.log(data)
-    //     browserInstances.map(instance => {
-    //         instance.postMessage(data)
-    //     })
-    // }
+
+    // port.postMessage(prices.loadHistoricPrices)
+    port.onmessage = function(event) {
+
+        const {data} = event
+        const resp = prices.loadHistoricPrices
+        port.postMessage({...resp, responseId: data.requestId})
+        // if(event)
+
+        // iterates over registered browser instances and sends the message
+        // browserInstances.map(instance => {
+        //     instance.postMessage(data)
+        // })
+    }
 
 }

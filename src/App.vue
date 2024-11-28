@@ -1,16 +1,8 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router' 
-  import {poller} from '@/controller/Poller.ts'
-
-  const worker = new SharedWorker('src/scripts/worker.js', {type: "module"})
-
-  worker.port.onmessage = handleNewMessage
-
-
-  function handleNewMessage(event) {
-
-
-  }
+import { RouterLink, RouterView } from 'vue-router' 
+import {poller} from '@/controller/Poller.ts'
+import {EventBus} from '@/controller/EventBus.ts'
+import { workerRequest } from './utils';
 
 </script>
 
