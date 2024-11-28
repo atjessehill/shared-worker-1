@@ -1,5 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import {poller} from '@/controller/Poller.ts'
+
+const worker = new SharedWorker('src/scripts/worker.js', {type: "module"})
+
+worker.port.onmessage = handleNewMessage
+
+
+function handleNewMessage(event) {
+
+  console.log(event)
+  count.value = event.data
+
+}
 
 defineProps<{ msg: string }>()
 
@@ -11,6 +24,7 @@ const count = ref(0)
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
+    <button type="button" @click="() => worker.port.postMessage('hello')"> Message</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

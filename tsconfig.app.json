@@ -6,7 +6,10 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
+    "baseUrl": ".", // Base directory for resolving non-relative imports
+    "paths": {
+        "@/*": ["src/*"] // Map "@/..." to "src/..."
+    },
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
