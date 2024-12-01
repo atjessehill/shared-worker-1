@@ -1,6 +1,7 @@
 import random
 import time
 import asyncio
+import json
 from client import Client
 from session import Session
 
@@ -21,10 +22,10 @@ async def feed(request: Request, ws: Websocket):
         return {'price': random.random(), 'time': time.time()}
 
     while True:
-        data = number_publisher()
-        await ws.send(data)
+        data = await number_publisher()
+        await ws.send(json.dumps(data))
         await asyncio.sleep(1)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9999)
+    app.run(host="0.0.0.0", port=9999, dev=True)

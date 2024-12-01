@@ -6,10 +6,13 @@ class Prices {
     private time: number = 0;
     private _prices: any[] = []
     private _ticker: string = 'APPL'
+    private _feedConn: WebSocket
 
     // private constructor ensures `new Prices` can't be called from outside of the class.
     private constructor() {
-        void this.poll()
+        // void this.poll()
+        this._feedConn = new WebSocket("ws://localhost:9999/feed")
+        this._feedConn.onmessage = (event) => void this.consumePrice(event)
     }
 
     public static getInstance(): Prices {
@@ -25,7 +28,14 @@ class Prices {
     }
 
     get loadHistoricPrices(){
+        console.log(this._prices)
         return {'event': 'historicPrices', 'ticker': this._ticker, 'prices': this._prices}
+    }
+
+    private async consumePrice(event: any): Promise<void> {
+        const data = JSON.parse(event.data)
+        this._prices.push(data)
+        EventBus.emit('NewPrice', {...data, 'event': 'NewPrice'})
     }
 
     public async poll(): Promise<void> {

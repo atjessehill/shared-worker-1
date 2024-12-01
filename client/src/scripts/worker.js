@@ -13,7 +13,6 @@ let browserInstances = [];
 // })
 
 EventBus.on('NewPrice', (event) => {
-    console.log(event)
     browserInstances.map(instance => {
         instance.postMessage(event)
     })
