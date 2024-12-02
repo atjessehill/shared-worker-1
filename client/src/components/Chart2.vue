@@ -7,9 +7,28 @@ import { workerRequest } from '@/utils';
 const options = ref({
          // Data: Data to be displayed in the chart
         data: [ ],
-        theme: 'ag-vivid-dark',
         // Series: Defines which chart type and data to use
-        series: [{ type: 'bar', xKey: 'time', yKey: 'price' }]
+        series: [{ type: 'bar', xKey: 'time', yKey: 'price' }],
+        axes: [
+          {
+            type: "number",
+            position: "bottom",
+            label: {
+              rotation: 45,
+              autoRotate: true,
+              formatter: function(params) {
+                var date = new Date(params.value * 1000);
+                return date.getHours().toString() + ':' + date.getMinutes().toString() + ':' + date.getSeconds().toString()
+              }
+            },
+          },
+          {
+            type: "number",
+            position: "left",
+            label: {},
+          },
+        ]
+        
 })
 
 EventBus.on('NewPrice', (event) => {

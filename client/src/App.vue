@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router' 
-import {poller} from '@/controller/Poller.ts'
 import {EventBus} from '@/controller/EventBus.ts'
 import { workerRequest } from './utils';
 

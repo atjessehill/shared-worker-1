@@ -10,7 +10,6 @@ class Prices {
 
     // private constructor ensures `new Prices` can't be called from outside of the class.
     private constructor() {
-        // void this.poll()
         this._feedConn = new WebSocket("ws://localhost:9999/feed")
         this._feedConn.onmessage = (event) => void this.consumePrice(event)
     }
@@ -28,7 +27,6 @@ class Prices {
     }
 
     get loadHistoricPrices(){
-        console.log(this._prices)
         return {'event': 'historicPrices', 'ticker': this._ticker, 'prices': this._prices}
     }
 
@@ -39,7 +37,7 @@ class Prices {
     }
 
     public async poll(): Promise<void> {
-    
+        // random number generator
         setInterval(() => {
             const price = {'time': this.time, 'price': Math.random()}
             this._prices.push(price)
@@ -48,7 +46,6 @@ class Prices {
             this.time++
         }, 1000);
     }
-
 
 }
 
