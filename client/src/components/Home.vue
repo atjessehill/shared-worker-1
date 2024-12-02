@@ -29,7 +29,7 @@ function openInNewWindow(path) {
   <p style="font-size: 1.25rem">This demo uses shared workers to synchronize data across multiple browser tabs. <br/>
     The shared worker executes a js class in the background which maintains a websocket connection with the server. When receiving new events, the shared worker sends the event to all open tabs.  
     <br/> 
-    See this for yourself by opening <span><RouterLink to="/chart1" target="_blank">chart 1</RouterLink> </span> and <span><RouterLink to="/chart2" target="_blank">chart 2</RouterLink></span> and watch them synchronize
+    Open both <span><RouterLink to="/chart1" target="_blank">chart 1</RouterLink> </span> and <span><RouterLink to="/chart2" target="_blank">chart 2</RouterLink></span> to see the synchronized chart updates.
   </p>
   <img src="/diagram.png"/>
 </template>
