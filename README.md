@@ -5,7 +5,7 @@ The [Shared Worker](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorke
 
 Another interesting use use case for shared workers is to synchronize data between browser tabs. This repo demonstrates how a shared worker maintains a websocket connection with a server and broadcasts events to all connected browser tabs. <br/>
 
-![Diagram](public/assets/diagram.png)
+![Diagram](client/public/diagram.png)
 
 The result is that each tab can be synchronized in real time with the same data.
 ![Description of GIF](example.gif)
